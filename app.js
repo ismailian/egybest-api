@@ -14,6 +14,5 @@ app.use(express.json());
 app.use("/api/v1", require("./routes/v1/v1"));
 
 /* start web service */
-app.listen(process.env.APP_PORT, () =>
-  console.log(`Web Service is running on ${process.env.APP_PORT}...`)
-);
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`Web Service is running on ${port}...`));
