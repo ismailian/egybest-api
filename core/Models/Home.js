@@ -16,6 +16,8 @@ class Home {
       this.content = res.body;
     }
 
+    console.log(this.content);
+
     /** get media objects */
     const $ = cheerio.load(this.content);
     const mediaList = [];
