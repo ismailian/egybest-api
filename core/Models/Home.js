@@ -16,8 +16,6 @@ class Home {
       this.content = res.body;
     }
 
-    console.log("Url:", process.env.EGYBEST_URL);
-
     /** get media objects */
     const $ = cheerio.load(this.content);
     const mediaList = [];
