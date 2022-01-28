@@ -27,5 +27,3 @@
  - /api/v1/episode
       + fetch episode info.
       + take in 3 query paramters [?name=ozark&season=1&episode=1] 
-
-``` [Routes] ```
