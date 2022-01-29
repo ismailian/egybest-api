@@ -20,8 +20,8 @@ class Episode {
     if (shows.length == 0) return null;
 
     /** extract name */
-    var link = shows[0].link;
     this.name = shows[0].title;
+    var link = shows[0].link;
     link = `${process.env.EGYBEST_URL}season/${this.name}-season-${this.season}/`;
 
     /** get all episodes */
