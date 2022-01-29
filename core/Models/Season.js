@@ -22,7 +22,7 @@ class Season {
     const res = await get(shows[0].link);
 
     /** get all seasons */
-    const $ = cheerio.load(res.body);
+    const $ = cheerio.load(res);
 
     const seasonList = [];
     $("div:nth-child(2) > div.h_scroll > div a").each((i, elm) => {

@@ -26,7 +26,7 @@ class Episode {
 
     /** get all episodes */
     const res = await get(link);
-    const $ = cheerio.load(res.body);
+    const $ = cheerio.load(res);
     const nodeList = $("div:nth-child(3) > div.movies_small a");
 
     const episodeList = [];
@@ -70,7 +70,7 @@ class Episode {
 
     /** get all episodes */
     const res = await get(link);
-    const $ = cheerio.load(res.body);
+    const $ = cheerio.load(res);
 
     // title
     const title = $(

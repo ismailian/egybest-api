@@ -23,7 +23,7 @@ class Movie {
 
     this.name = movies[0].title;
     const res = await get(movies[0].link);
-    const $ = cheerio.load(res.body);
+    const $ = cheerio.load(res);
 
     // extract data
     const title = $(

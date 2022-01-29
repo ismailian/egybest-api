@@ -20,7 +20,7 @@ class Show {
 
     this.name = shows[0].title;
     const res = await get(shows[0].link);
-    const $ = cheerio.load(res.body);
+    const $ = cheerio.load(res);
 
     // extract data
     const title = $(
