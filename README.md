@@ -3,10 +3,10 @@
 ###### This API will help you communicate with and fetch data from Egybest Website without the trouble of manually sending requests and parsing unnecessary data.
 
 <[Installation]>
-``` git clone https://github.com/ismailian/egybest-api ```
-``` cd egybest-api ```
-``` npm install ```
-``` npm start ```
+- Clone  ``` git clone https://github.com/ismailian/egybest-api ```
+- Move to directory ``` cd egybest-api ```
+- Install packages ``` npm install ```
+- Start server ``` npm start ```
 
 <[Usage]>
 
