@@ -4,33 +4,33 @@
 
 ``` [Routes] ```
 
- - /api/v1/recent
+ - GET /api/v1/recent
       + fetch recent media from the home page.
       + does not take any parameters.
 
- - /api/v1/search
+ - GET /api/v1/search
       + search for a particular media object by a keywork.
       + takes in a query paramter [?keyword=ozark] 
 
-- /api/v1/movie
+- GET /api/v1/movie
       + get movie info
       + takes in a query parameter [?name=forrest+gump]
 
-- /api/v1/show
+- GET /api/v1/show
       + get info about a tv show
       + takes in a query parameter [?name=breaking+bad]
 
- - /api/v1/seasons
+ - GET /api/v1/seasons
       + fetch all seasons for a particular tv show.
       + takes in a query paramter [?name=ozark] 
 
 
- - /api/v1/episodes
+ - GET /api/v1/episodes
       + fetch all season episodes for a particular tv show.
       + takes in 2 query paramters [?name=ozark&season=1] 
 
 
- - /api/v1/episode
+ - GET /api/v1/episode
       + fetch episode info.
       + takes in 3 query paramters [?name=ozark&season=1&episode=1] 
 
