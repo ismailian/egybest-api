@@ -1,5 +1,5 @@
+const { get } = require("../ajax/Ajax");
 const cheerio = require("cheerio");
-const needle = require("needle");
 const Search = require("./Search");
 
 /** The class responsible for fetching media seasons */
@@ -25,7 +25,7 @@ class Episode {
     link = `${process.env.EGYBEST_URL}season/${this.name}-season-${this.season}/`;
 
     /** get all episodes */
-    const res = await needle("get", link);
+    const res = await get(link);
     const $ = cheerio.load(res.body);
     const nodeList = $("div:nth-child(3) > div.movies_small a");
 
@@ -69,7 +69,7 @@ class Episode {
     link = `${process.env.EGYBEST_URL}episode/${this.name}-season-${this.season}-ep-${episode}/`;
 
     /** get all episodes */
-    const res = await needle("get", link);
+    const res = await get(link);
     const $ = cheerio.load(res.body);
 
     // title

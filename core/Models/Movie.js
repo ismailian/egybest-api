@@ -1,4 +1,4 @@
-const needle = require("needle");
+const { get } = require("../ajax/Ajax");
 const cheerio = require("cheerio");
 const Search = require("./Search");
 
@@ -22,7 +22,7 @@ class Movie {
     }
 
     this.name = movies[0].title;
-    const res = await needle("get", movies[0].link);
+    const res = await get(movies[0].link);
     const $ = cheerio.load(res.body);
 
     // extract data

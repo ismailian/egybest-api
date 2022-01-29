@@ -1,5 +1,5 @@
+const { get } = require("../ajax/Ajax");
 const cheerio = require("cheerio");
-const needle = require("needle");
 const Search = require("./Search");
 
 /** The class responsible for fetching media seasons */
@@ -18,9 +18,8 @@ class Season {
 
     if (shows.length == 0) return null;
 
-    const link = shows[0].link;
     this.name = shows[0].title;
-    const res = await needle("get", link);
+    const res = await get(shows[0].link);
 
     /** get all seasons */
     const $ = cheerio.load(res.body);

@@ -1,4 +1,4 @@
-const needle = require("needle");
+const { get } = require("../ajax/Ajax");
 const cheerio = require("cheerio");
 
 /**
@@ -12,8 +12,7 @@ class Home {
    */
   async movies() {
     if (!this.content) {
-      const res = await needle("get", process.env.EGYBEST_URL);
-      this.content = res.body;
+      this.content = await get(process.env.EGYBEST_URL);
     }
 
     /** get media objects */
@@ -43,8 +42,7 @@ class Home {
    */
   async shows() {
     if (!this.content) {
-      const res = await needle("get", process.env.EGYBEST_URL);
-      this.content = res.body;
+      this.content = await get(process.env.EGYBEST_URL);
     }
 
     const $ = cheerio.load(this.content);

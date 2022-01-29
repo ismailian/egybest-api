@@ -1,4 +1,4 @@
-const needle = require("needle");
+const { get } = require("../ajax/Ajax");
 
 /** The class responsible for searching */
 class Search {
@@ -9,11 +9,7 @@ class Search {
   /** search for movies and tv shows */
   async all() {
     if (!this.content) {
-      const res = await needle(
-        "get",
-        process.env.EGYBEST_SEARCH + this.keyword
-      );
-      this.content = res.body;
+      this.content = await get(process.env.EGYBEST_SEARCH + this.keyword);
     }
 
     /** parse results */
@@ -43,11 +39,7 @@ class Search {
    */
   async movies() {
     if (!this.content) {
-      const res = await needle(
-        "get",
-        `${process.env.EGYBEST_URL}autoComplete.php?q=${this.keyword}`
-      );
-      this.content = res.body;
+      this.content = await get(process.env.EGYBEST_SEARCH + this.keyword);
     }
 
     /** parse results */
@@ -79,11 +71,7 @@ class Search {
    */
   async shows() {
     if (!this.content) {
-      const res = await needle(
-        "get",
-        `${process.env.EGYBEST_URL}autoComplete.php?q=${this.keyword}`
-      );
-      this.content = res.body;
+      this.content = await get(process.env.EGYBEST_SEARCH + this.keyword);
     }
 
     /** parse results */
