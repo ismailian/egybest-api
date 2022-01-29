@@ -8,11 +8,17 @@
       + fetch recent media from the home page.
       + does not take any parameters.
 
-
  - /api/v1/search
       + search for a particular media object by a keywork.
       + take in a query paramter [?keyword=ozark] 
 
+- /api/v1/movie
+      + get movie info
+      + takes in a query parameter [?name=forrest+gump]
+
+- /api/v1/show
+      + get info about a tv show
+      + takes in a query parameter [?name=breaking+bad]
 
  - /api/v1/seasons
       + fetch all seasons for a particular tv show.

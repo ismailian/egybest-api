@@ -1,6 +1,8 @@
 const express = require("express");
 const Home = require("../../core/Models/Home");
 const Search = require("../../core/Models/Search");
+const Movie = require("../../core/Models/Movie");
+const Show = require("../../core/Models/Show");
 const Season = require("../../core/Models/Season");
 const Episode = require("../../core/Models/Episode");
 
@@ -98,6 +100,54 @@ Router.get("/search", async (req, res) => {
   if (type === "show") {
     data["series"] = await lookUp.shows();
   }
+
+  return res.status(200).json({
+    status: true,
+    data,
+  });
+});
+
+/**
+ * GET /api/v1/movie
+ * ----------------
+ * returns info about a movie
+ */
+Router.get("/movie", async (req, res) => {
+  const name = req.query.name?.trim();
+
+  // validate name parameter
+  if (!name || typeof name == "undefined") {
+    return res
+      .status(400)
+      .json({ status: false, message: "Parameter [name] is required." });
+  }
+
+  const movie = new Movie(name);
+  var data = await movie.get();
+
+  return res.status(200).json({
+    status: true,
+    data,
+  });
+});
+
+/**
+ * GET /api/v1/show
+ * ----------------
+ * returns info about a tv show
+ */
+Router.get("/show", async (req, res) => {
+  const name = req.query.name?.trim();
+
+  // validate name parameter
+  if (!name || typeof name == "undefined") {
+    return res
+      .status(400)
+      .json({ status: false, message: "Parameter [name] is required." });
+  }
+
+  const show = new Show(name);
+  var data = await show.get();
 
   return res.status(200).json({
     status: true,

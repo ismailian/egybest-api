@@ -38,7 +38,9 @@ class Search {
   }
 
   /**
-   * search movies */
+   * search movies
+   * @returns Array returns an array of results
+   */
   async movies() {
     if (!this.content) {
       const res = await needle(
@@ -72,7 +74,9 @@ class Search {
   }
 
   /**
-   * search tv shows */
+   * search tv shows
+   * @returns Array returns an array of objects.
+   */
   async shows() {
     if (!this.content) {
       const res = await needle(
