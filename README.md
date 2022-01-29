@@ -2,7 +2,13 @@
 
 ###### This API will help you communicate with and fetch data from Egybest Website without the trouble of manually sending requests and parsing unnecessary data.
 
-<[Routes]>
+<[Installation]>
+``` git clone https://github.com/ismailian/egybest-api ```
+``` cd egybest-api ```
+``` npm install ```
+``` npm start ```
+
+<[Usage]>
 
  - ```GET /api/v1/recent```
       + fetch recent media from the home page.
