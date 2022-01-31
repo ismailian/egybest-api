@@ -1,4 +1,6 @@
 const express = require("express");
+const cacheService = require("express-api-cache");
+
 const Home = require("../../core/Models/Home");
 const Search = require("../../core/Models/Search");
 const Movie = require("../../core/Models/Movie");
@@ -8,6 +10,7 @@ const Episode = require("../../core/Models/Episode");
 
 /** express router */
 const Router = express.Router();
+const cache = cacheService.cache;
 
 /*** BEGIN [routes] */
 
@@ -16,7 +19,7 @@ const Router = express.Router();
  * ------------------
  * returns the latest released media.
  */
-Router.get("/recent", async (req, res) => {
+Router.get("/recent", cache("10 minutes"), async (req, res) => {
   var type = "all";
 
   // validate type param
@@ -60,7 +63,7 @@ Router.get("/recent", async (req, res) => {
  * ------------------
  * search for a media by keyword and returns the findings.
  */
-Router.get("/search", async (req, res) => {
+Router.get("/search", cache("10 minutes"), async (req, res) => {
   const keyword = req.query.keyword?.trim();
 
   // validate keyword param
@@ -112,7 +115,7 @@ Router.get("/search", async (req, res) => {
  * ----------------
  * returns info about a movie
  */
-Router.get("/movie", async (req, res) => {
+Router.get("/movie", cache("10 minutes"), async (req, res) => {
   const name = req.query.name?.trim();
 
   // validate name parameter
@@ -136,7 +139,7 @@ Router.get("/movie", async (req, res) => {
  * ----------------
  * returns info about a tv show
  */
-Router.get("/show", async (req, res) => {
+Router.get("/show", cache("10 minutes"), async (req, res) => {
   const name = req.query.name?.trim();
 
   // validate name parameter
@@ -160,7 +163,7 @@ Router.get("/show", async (req, res) => {
  * ------------------
  * returns a list of seasons for a tv show.
  */
-Router.get("/seasons", async (req, res) => {
+Router.get("/seasons", cache("10 minutes"), async (req, res) => {
   const name = req.query.name?.trim();
 
   // validate name param
@@ -184,7 +187,7 @@ Router.get("/seasons", async (req, res) => {
  * ------------------
  * returns a list of episodes for a tv show season.
  */
-Router.get("/episodes", async (req, res) => {
+Router.get("/episodes", cache("10 minutes"), async (req, res) => {
   const name = req.query.name?.trim();
   const season = req.query.season?.trim();
 
@@ -217,7 +220,7 @@ Router.get("/episodes", async (req, res) => {
  * ------------------
  * returns a list of episodes for a tv show season.
  */
-Router.get("/episode", async (req, res) => {
+Router.get("/episode", cache("10 minutes"), async (req, res) => {
   const name = req.query.name?.trim();
   const season = req.query.season?.trim();
   const episode = req.query.episode?.trim();
