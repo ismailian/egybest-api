@@ -4,60 +4,17 @@ const Search = require("./Search");
 
 /** The class responsible for fetching media seasons */
 class Episode {
-  constructor(name, season) {
+  constructor(name, season, episode) {
     this.name = name;
     this.season = season;
-  }
-
-  /**
-   * Get all season episodes.
-   * @returns array return array of media objects
-   */
-  async all() {
-    const search = new Search(this.name);
-    const shows = await search.shows();
-
-    if (shows.length == 0) return null;
-
-    /** extract name */
-    this.name = shows[0].title;
-    var link = shows[0].link;
-    link = `${process.env.EGYBEST_URL}season/${this.name}-season-${this.season}/`;
-
-    /** get all episodes */
-    const res = await get(link);
-    const $ = cheerio.load(res);
-    const nodeList = $("div:nth-child(3) > div.movies_small a");
-
-    const episodeList = [];
-    nodeList.each((n, elm) => {
-      const title = $("span.title", elm).text();
-      const format = $("span.ribbon > span", elm).text();
-      const rating = $("span.r > i > i", elm).text();
-      const cover = $("img", elm).attr("src");
-      const link = $(elm).attr("href");
-
-      episodeList.push({
-        title,
-        rating,
-        format,
-        cover,
-        link,
-      });
-    });
-
-    return {
-      series: this.name,
-      season: this.season,
-      episodes: episodeList.reverse(),
-    };
+    this.episode = episode;
   }
 
   /**
    * Get episode info by number
-   * @param {Number} episode the episode number
+   * @returns Object returns an object of data
    */
-  async get(episode) {
+  async get() {
     const search = new Search(this.name);
     const shows = await search.shows();
 
@@ -66,7 +23,7 @@ class Episode {
     /** extract name */
     this.name = shows[0].title;
     var link = shows[0].link;
-    link = `${process.env.EGYBEST_URL}episode/${this.name}-season-${this.season}-ep-${episode}/`;
+    link = `${process.env.EGYBEST_URL}episode/${this.name}-season-${this.season}-ep-${this.episode}/`;
 
     /** get all episodes */
     const res = await get(link);
@@ -155,7 +112,7 @@ class Episode {
       series: this.name,
       season: this.season,
       episode: {
-        number: episode,
+        number: this.episode,
         title,
         country,
         language,

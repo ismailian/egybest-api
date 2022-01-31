@@ -4,37 +4,52 @@ const Search = require("./Search");
 
 /** The class responsible for fetching media seasons */
 class Season {
-  constructor(name) {
+  constructor(name, number) {
     this.name = name;
+    this.number = number;
   }
 
   /**
-   * Get all media seasons.
-   * @returns array return array of media objects
+   * Get season info
+   * @returns Object returns object of data
    */
-  async all() {
+  async get() {
     const search = new Search(this.name);
     const shows = await search.shows();
 
     if (shows.length == 0) return null;
 
+    /** extract name */
     this.name = shows[0].title;
-    const res = await get(shows[0].link);
+    var link = shows[0].link;
+    link = `${process.env.EGYBEST_URL}season/${this.name}-season-${this.number}/`;
 
-    /** get all seasons */
+    /** get all episodes */
+    const res = await get(link);
     const $ = cheerio.load(res);
+    const nodeList = $("div:nth-child(3) > div.movies_small a");
 
-    const seasonList = [];
-    $("div:nth-child(2) > div.h_scroll > div a").each((i, elm) => {
-      const link = $(elm).attr("href");
+    const episodeList = [];
+    nodeList.each((n, elm) => {
+      const title = $("span.title", elm).text();
+      const format = $("span.ribbon > span", elm).text();
+      const rating = $("span.r > i > i", elm).text();
       const cover = $("img", elm).attr("src");
-      const number = link.match(/\-season\-(?<num>\d+)/).groups.num;
-      seasonList.push({ number, cover, link });
+      const link = $(elm).attr("href");
+
+      episodeList.push({
+        title,
+        rating,
+        format,
+        cover,
+        link,
+      });
     });
 
     return {
       series: this.name,
-      seasons: seasonList.reverse(),
+      season: this.number,
+      episodes: episodeList.reverse(),
     };
   }
 }
