@@ -24,6 +24,7 @@ class Episode {
     this.name = shows[0].title;
     var link = shows[0].link;
     link = `${process.env.EGYBEST_URL}episode/${this.name}-season-${this.season}-ep-${this.episode}/`;
+    link = link.replaceAll(" ", "-");
 
     /** get all episodes */
     const res = await get(link);

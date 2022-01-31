@@ -17,13 +17,14 @@ class Top {
     $("#movies > a").each((i, elm) => {
       movieList.push({
         title: $(".title", elm).text(),
-        link: $(elm).attr("href"),
-        cover: $("img", elm).attr("src"),
-        rating: $("span.r > i > i").text(),
+        rating: $("span.r > i > i", elm).text(),
         quality: $("span.ribbon.r3 > span", elm).text(),
+        cover: $("img", elm).attr("src"),
+        link: $(elm).attr("href"),
       });
     });
 
+    movieList.pop();
     return movieList;
   }
 
@@ -40,13 +41,14 @@ class Top {
     $("#movies > a").each((i, elm) => {
       showList.push({
         title: $(".title", elm).text(),
-        link: $(elm).attr("href"),
-        cover: $("img", elm).attr("src"),
-        rating: $("span.r > i > i").text(),
+        rating: $("span.r > i > i", elm).text(),
         quality: $("span.ribbon.r3 > span", elm).text(),
+        cover: $("img", elm).attr("src"),
+        link: $(elm).attr("href"),
       });
     });
 
+    showList.pop();
     return showList;
   }
 }

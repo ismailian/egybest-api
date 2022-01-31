@@ -4,10 +4,13 @@ const cacheService = require("express-api-cache");
 const Home = require("../Models/Home");
 const Search = require("../Models/Search");
 const Trend = require("../Models/Trend");
+const Top = require("../Models/Top");
+const Latest = require("../Models/Latest");
 const Movie = require("../Models/Movie");
 
 /** cache */
 const cache = cacheService.cache;
+
 /**
  * GET movies/recent
  */
@@ -15,6 +18,34 @@ Router.get("/recent", cache("10 minutes"), async (req, res) => {
   const recent = new Home();
   const data = {};
   data["movies"] = await recent.movies();
+
+  return res.status(200).json({
+    status: true,
+    data,
+  });
+});
+
+/**
+ * GET movies/top
+ */
+Router.get("/top", cache("10 minutes"), async (req, res) => {
+  const top = new Top();
+  const data = {};
+  data["movies"] = await top.movies();
+
+  return res.status(200).json({
+    status: true,
+    data,
+  });
+});
+
+/**
+ * GET movies/latest
+ */
+Router.get("/latest", cache("10 minutes"), async (req, res) => {
+  const latest = new Latest();
+  const data = {};
+  data["movies"] = await latest.movies();
 
   return res.status(200).json({
     status: true,

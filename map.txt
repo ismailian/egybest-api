@@ -1,0 +1,27 @@
+# Routes:
+---------
+
+/api/v1
+    
+    /recent
+
+    /search
+
+    /movies
+        /top
+        /latest
+        /recent
+        /trending
+        /find?name=^
+        /search?name=^
+
+    /series
+        /top
+        /latest
+        /recent
+        /trending
+        /find?name=^
+        /search?name=^
+        /season?name=^&season=1
+        /episode?name=^&season=1&episode=1
+        

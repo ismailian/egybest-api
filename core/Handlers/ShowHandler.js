@@ -1,8 +1,12 @@
 const express = require("express");
 const Router = express.Router();
 const cacheService = require("express-api-cache");
-const Trend = require("../Models/Trend");
 const Show = require("../Models/Show");
+const Home = require("../Models/Home");
+const Search = require("../Models/Search");
+const Trend = require("../Models/Trend");
+const Top = require("../Models/Top");
+const Latest = require("../Models/Latest");
 const Season = require("../Models/Season");
 const Episode = require("../Models/Episode");
 
@@ -16,6 +20,34 @@ Router.get("/recent", cache("10 minutes"), async (req, res) => {
   const recent = new Home();
   const data = {};
   data["series"] = await recent.shows();
+
+  return res.status(200).json({
+    status: true,
+    data,
+  });
+});
+
+/**
+ * GET series/top
+ */
+Router.get("/top", cache("10 minutes"), async (req, res) => {
+  const top = new Top();
+  const data = {};
+  data["series"] = await top.shows();
+
+  return res.status(200).json({
+    status: true,
+    data,
+  });
+});
+
+/**
+ * GET series/latest
+ */
+Router.get("/latest", cache("10 minutes"), async (req, res) => {
+  const latest = new Latest();
+  const data = {};
+  data["series"] = await latest.shows();
 
   return res.status(200).json({
     status: true,
@@ -87,7 +119,7 @@ Router.get("/search", cache("10 minutes"), async (req, res) => {
  */
 Router.get("/season", cache("10 minutes"), async (req, res) => {
   const name = req.query.name?.trim();
-  const seasonNumber = req.query.seasonNumber?.trim();
+  const seasonNumber = req.query.season?.trim();
 
   // validate name parameter
   if (!name || typeof name == "undefined") {
@@ -109,9 +141,8 @@ Router.get("/season", cache("10 minutes"), async (req, res) => {
     });
   }
 
-  const data = {};
   const season = new Season(name, seasonNumber);
-  data = await season.get();
+  const data = await season.get();
 
   return res.status(200).json({
     status: true,
@@ -124,8 +155,8 @@ Router.get("/season", cache("10 minutes"), async (req, res) => {
  */
 Router.get("/episode", cache("10 minutes"), async (req, res) => {
   const name = req.query.name?.trim();
-  const seasonNumber = req.query.seasonNumber?.trim();
-  const episodeNumber = req.query.episodeNumber?.trim();
+  const seasonNumber = req.query.season?.trim();
+  const episodeNumber = req.query.episode?.trim();
 
   // validate name parameter
   if (!name || typeof name == "undefined") {
@@ -159,9 +190,8 @@ Router.get("/episode", cache("10 minutes"), async (req, res) => {
     });
   }
 
-  const data = {};
   const episode = new Episode(name, seasonNumber, episodeNumber);
-  data = await episode.get();
+  const data = await episode.get();
 
   return res.status(200).json({
     status: true,

@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 const cacheService = require("express-api-cache");
-const Search = require("../Models/Season");
+const Search = require("../Models/Search");
 
 /** cache */
 const cache = cacheService.cache;
@@ -11,7 +11,7 @@ const cache = cacheService.cache;
  * ------------------
  * search for a media by keyword and returns the findings.
  */
-Router.get("/search", cache("10 minutes"), async (req, res) => {
+Router.get("/", cache("10 minutes"), async (req, res) => {
   const keyword = req.query.keyword?.trim();
 
   // validate keyword param

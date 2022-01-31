@@ -11,7 +11,7 @@ const cache = cacheService.cache;
  * ------------------
  * returns the latest released media.
  */
-Router.get("/recent", cache("10 minutes"), async (req, res) => {
+Router.get("/", cache("10 minutes"), async (req, res) => {
   var type = "all";
 
   // validate type param
