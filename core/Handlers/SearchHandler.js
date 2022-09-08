@@ -21,7 +21,7 @@ Router.get("/", cache("10 minutes"), async (req, res) => {
       .json({ status: false, message: "Parameter [keyword] is required!" });
   }
 
-  var type = "all";
+  let type = "all";
 
   // validate type param
   if (req.query.hasOwnProperty("type")) {

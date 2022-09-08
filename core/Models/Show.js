@@ -14,7 +14,7 @@ class Show {
   async get() {
     const search = new Search(this.name);
     const shows = await search.shows();
-    if (shows.length == 0) {
+    if (shows.length === 0) {
       return null;
     }
 
@@ -27,12 +27,12 @@ class Show {
       ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(1) > td > h1"
     ).text();
 
-    var language = $(
-      ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(2) > td:nth-child(2) > a:nth-child(1)"
+    let language = $(
+        ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(2) > td:nth-child(2) > a:nth-child(1)"
     ).attr("href");
 
-    var country = $(
-      ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(2) > td:nth-child(2) > a:nth-child(2)"
+    let country = $(
+        ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(2) > td:nth-child(2) > a:nth-child(2)"
     ).attr("href");
 
     const category = $(

@@ -12,7 +12,7 @@ const cache = cacheService.cache;
  * returns the latest released media.
  */
 Router.get("/", cache("10 minutes"), async (req, res) => {
-  var type = "all";
+  let type = "all";
 
   // validate type param
   if (req.query.hasOwnProperty("type")) {
@@ -31,7 +31,7 @@ Router.get("/", cache("10 minutes"), async (req, res) => {
   // movies and series
   if (type === "all") {
     data["movies"] = await recent.movies();
-    data["shows"] = await recent.shows();
+    data["series"] = await recent.shows();
   }
 
   // movies only
@@ -41,7 +41,7 @@ Router.get("/", cache("10 minutes"), async (req, res) => {
 
   // series only
   if (type === "show") {
-    data["shows"] = await recent.shows();
+    data["series"] = await recent.shows();
   }
 
   return res.status(200).json({

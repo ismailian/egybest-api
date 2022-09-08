@@ -83,7 +83,7 @@ Router.get("/find", cache("10 minutes"), async (req, res) => {
   }
 
   const show = new Show(name);
-  var data = await show.get();
+  let data = await show.get();
 
   return res.status(200).json({
     status: true,

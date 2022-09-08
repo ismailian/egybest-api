@@ -17,11 +17,11 @@ class Season {
     const search = new Search(this.name);
     const shows = await search.shows();
 
-    if (shows.length == 0) return null;
+    if (shows.length === 0) return null;
 
     /** extract name */
     this.name = shows[0].title;
-    var link = shows[0].link;
+    let link = shows[0].link;
     link = `${process.env.EGYBEST_URL}season/${this.name}-season-${this.number}/`;
     link = link.replaceAll(" ", "-");
 

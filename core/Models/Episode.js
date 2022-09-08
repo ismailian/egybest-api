@@ -18,11 +18,11 @@ class Episode {
     const search = new Search(this.name);
     const shows = await search.shows();
 
-    if (shows.length == 0) return null;
+    if (shows.length === 0) return null;
 
     /** extract name */
     this.name = shows[0].title;
-    var link = shows[0].link;
+    let link = shows[0].link;
     link = `${process.env.EGYBEST_URL}episode/${this.name}-season-${this.season}-ep-${this.episode}/`;
     link = link.replaceAll(" ", "-");
 
@@ -36,13 +36,13 @@ class Episode {
     ).text();
 
     // language
-    var language = $(
-      ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(3) > td:nth-child(2) > a:nth-child(1)"
+    let language = $(
+        ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(3) > td:nth-child(2) > a:nth-child(1)"
     ).attr("href");
 
     // country
-    var country = $(
-      ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(3) > td:nth-child(2) > a:nth-child(2)"
+    let country = $(
+        ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(3) > td:nth-child(2) > a:nth-child(2)"
     ).attr("href");
 
     // duration
@@ -51,8 +51,8 @@ class Episode {
     ).text();
 
     // category
-    var category = $(
-      ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(4) > td:nth-child(2) > a"
+    let category = $(
+        ".full_movie.table.full.mgb > div:nth-child(2) > table > tbody > tr:nth-child(4) > td:nth-child(2) > a"
     ).attr("href");
 
     // rating
